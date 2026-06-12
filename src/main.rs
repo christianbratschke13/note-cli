@@ -14,6 +14,9 @@ struct Cli {
 enum Commands {
     /// Adds a note
     Add(Add),
+
+    /// Lists all notes
+    List,
 }
 
 #[derive(Args)]
@@ -34,6 +37,9 @@ fn main() {
                 println!("Please provide a string to write the note")
             }
         },
+        Some(Commands::List) => {
+            api::note::list();
+        }
         None => {}
     }
 }
