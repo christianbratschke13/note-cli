@@ -24,7 +24,3 @@ target
 # Added by cargo
 
 /target
-
-# These are the created notes
-.notes/db/*
-!.notes/db/.gitkeep
