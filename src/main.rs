@@ -14,7 +14,8 @@ struct Cli {
 enum Commands {
     /// Adds a note
     Add(Add),
-
+    /// Deletes a note
+    Delete(Delete),
     /// Lists all notes
     List,
 }
@@ -23,6 +24,12 @@ enum Commands {
 struct Add {
     /// the note as string
     note: Option<String>,
+}
+
+#[derive(Args)]
+struct Delete {
+    /// the hash of the note
+    hash: Option<String>,
 }
 
 fn main() {
@@ -37,9 +44,17 @@ fn main() {
                 println!("Please provide a string to write the note")
             }
         },
+        Some(Commands::Delete(delete)) => match delete.hash {
+            Some(ref hash) => {
+                api::note::delete(hash);
+            }
+            None => {
+                println!("Please provide the hash of a note to delete");
+            }
+        },
         Some(Commands::List) => {
             api::note::list();
-        }
+        },
         None => {}
     }
 }
