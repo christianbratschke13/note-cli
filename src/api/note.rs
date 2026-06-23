@@ -31,3 +31,14 @@ pub fn delete(hash: &String) {
         }
     }
 }
+  
+pub fn list() {
+    let path = Path::new(".notes/db");
+    let directory = path.read_dir().expect("Could not read directory");
+
+    for entry in directory {
+        if let Ok(entry) = entry {
+            println!("{}", entry.path().file_name().unwrap().display());
+        }
+    }
+}

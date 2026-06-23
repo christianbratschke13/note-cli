@@ -14,9 +14,10 @@ struct Cli {
 enum Commands {
     /// Adds a note
     Add(Add),
-
     /// Deletes a note
     Delete(Delete),
+    /// Lists all notes
+    List,
 }
 
 #[derive(Args)]
@@ -50,6 +51,9 @@ fn main() {
             None => {
                 println!("Please provide the hash of a note to delete");
             }
+        },
+        Some(Commands::List) => {
+            api::note::list();
         },
         None => {}
     }
